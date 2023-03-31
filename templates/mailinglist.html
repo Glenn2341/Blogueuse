@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Editorial by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}">
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Editorial</strong> by HTML5 UP</a>
+									<ul class="icons">
+										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+									</ul>
+								</header>
+
+							<!-- Banner -->
+								<section id="banner">
+									<div class="content">
+										<header>
+											<h1>Join our Mailing List Today</h1>
+											<p>Free, High-Quality Content</p>
+										</header>
+										<p>Don't miss out on the latest articles, insights, and updates from our talented team of writers. By joining our mailing list, you'll receive a carefully curated selection of content tailored to your interests, delivered straight to your inbox.</p>
+										<p>Here's what you can expect when you sign up:</p>
+										<p>Exclusive Access: Be the first to read our latest articles, interviews, and in-depth guides on a wide range of topics, from spirituality and astrology to productivity and gaming.</p>
+										<p>Personalized Recommendations: Based on your preferences, we'll send you a handpicked selection of articles that we believe will resonate with you and inspire your personal journey.</p>
+										<p>Special Offers and Invitations: Enjoy exclusive discounts, promotions, and invitations to special events, webinars, and workshops hosted by our team and guest experts.</p>
+										<p>Community Connection: Engage with like-minded individuals, share your thoughts and experiences, and be part of a supportive community that values knowledge, curiosity, and personal growth.</p>
+										<p>Joining our mailing list is quick and easy! Simply enter your email address below and select your areas of interest. We respect your privacy and promise never to spam you or share your information with third parties.</p>
+										<p>Sign up today and embark on a journey of exploration, inspiration, and personal growth with our incredible team of writers and experts!</p>
+										<p>Enter your email address below, and a confirmation email will be sent to your account:</p>
+										
+										<!-- Search -->
+										<!-- type="email" for native browser validation -->
+										<section id="email" class="alt">
+											<form method="post" action="{{ url_for('home.mailinglist') }}">
+												{{ form.hidden_tag() }}
+												{{ form.email(placeholder="Your Email Address", id="query", required="required", type="email") }}
+												{% if form.email.errors %}
+												<ul class="validation-errors">
+													{% for error in form.email.errors %}
+														<li>{{ error }}</li>
+													{% endfor %}
+												</ul>
+												{% endif %}
+												{{ form.submit(style="margin-top: 10px;") }}
+											</form>
+										</section>
+										<!--
+										<ul class="actions">
+											<li><a href="#" class="button big">Submit</a></li>
+										</ul>
+										-->
+										
+									</div>
+									<span class="image object">
+										<!-- <img src="images/pic10.jpg" alt="" /> -->
+										<img src="{{ url_for('static', filename='images/pic10.jpg') }}" alt="">
+									</span>
+								</section>
+							
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				{% include 'sidebar.html' %}
+
+			</div>
+		
+			<script src="{{ url_for('static', filename='assets/js/jquery.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/browser.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/breakpoints.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/util.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+		
+
+
+	</body>
+</html>

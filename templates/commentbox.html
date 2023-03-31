@@ -1,0 +1,234 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Generic - Editorial by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}" />
+		<style>
+			.comment-menu form {
+				display: flex;
+				flex-direction: column;
+			}
+			.comment-menu label, .comment-menu input {
+				margin-bottom: 10px;
+			}
+			.comment-menu input[type="submit"] {
+				width: 150px;
+			}
+			.comment-menu nav {
+				width: 300px;
+			}
+		</style>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Editorial</strong> by HTML5 UP</a>
+									<ul class="icons">
+										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+									</ul>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>post here</h1>
+									</header>
+									<!--
+									<span class="image main"><img src="{{ url_for('static', filename='images/pic01.jpg') }}" alt="" /></span>
+									-->																								
+								</section>
+
+
+
+
+								<section>
+									<!-- COMMENT FORM NEW NEW NEW-->
+								<nav id="menu" class="comment-menu">
+									<ul>
+										<li>
+											<span class="opener">Make a Comment, dropdown with error reportin</span>
+											<ul>
+												<!-- Comment form -->
+												<section id="comment-form" class="alt">
+													<form method="post" action="{{ url_for('post.submit_comment_basic') }}">
+														{{ form.hidden_tag() }}
+
+														{{ form.comment.label }} {{ form.comment() }}
+														{% if form.comment.errors %}
+														<ul>
+														{% for error in form.comment.errors %}
+															<li>{{ error }}</li>
+														{% endfor %}
+														</ul>
+														{% endif %}
+
+														{{ form.name.label }} {{ form.name() }}
+														{% if form.name.errors %}
+														<ul>
+														{% for error in form.name.errors %}
+															<li>{{ error }}</li>
+														{% endfor %}
+														</ul>
+														{% endif %}
+
+														<input type="submit" value="Submit">
+													</form>
+												</section>
+											</ul>
+										</li>
+									</ul>
+								</nav>
+								</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+								<section>
+									<!-- COMMENT FORM NEW NEW-->
+								
+									<ul>
+										<li>
+											<span>Make a Comment</span>
+											<ul>
+												<!-- Comment form -->
+												<section id="comment-form" class="alt">
+													<form method="post" action="{{ url_for('post.submit_comment_basic') }}">
+														{{ form.hidden_tag() }}
+
+														{{ form.comment.label }} {{ form.comment() }}
+														{% if form.comment.errors %}
+														<ul>
+														{% for error in form.comment.errors %}
+															<li>{{ error }}</li>
+														{% endfor %}
+														</ul>
+														{% endif %}
+
+														{{ form.name.label }} {{ form.name() }}
+														{% if form.name.errors %}
+															<ul>
+															{% for error in form.name.errors %}
+																<li>{{ error }}</li>
+															{% endfor %}
+															</ul>
+														{% endif %}
+														<input type="submit" value="Submit">
+													</form>
+												</section>
+											</ul>
+										</li>
+									</ul>
+								</section>
+
+								
+
+								<section>
+									<!-- COMMENT FORM NEW-->
+									
+								<nav id="menu" class="comment-menu">
+									<ul>
+										<li>
+											<span class="opener">Make a Comment</span>
+											<ul>
+												<!-- Comment form -->
+												<section id="comment-form" class="alt">
+													<form method="post" action="{{ url_for('post.submit_comment_basic') }}">
+														{{ form.hidden_tag() }}
+														{{ form.comment.label }} {{ form.comment() }}
+														{{ form.name.label }} {{ form.name() }}
+														<input type="submit" value="Submit">
+													</form>
+												</section>
+											</ul>
+										</li>
+									</ul>
+								</nav>
+
+
+								</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <!-- COMMENT FORM ORIGINAL-->
+								<nav id="menu" class="comment-menu">
+									<ul>
+										<li>
+											<span class="opener">Make a Comment</span>
+											<ul>
+												<!-- Comment form -->
+												<section id="comment-form" class="alt">
+													<form method="post" action="{{ url_for('post.submit_comment_basic') }}">
+														<!-- Post ID (hidden input) -->
+														<input type="hidden" name="post_id" value="1">
+
+														<!-- Comment input box -->
+														<label for="comment">Comment:</label>
+														<input type="text" name="comment" id="comment" placeholder="Write your comment" required>
+														
+														<!-- Name input box (optional) -->
+														<label for="name">Name (optional):</label>
+														<input type="text" name="name" id="name" placeholder="Your name">
+														
+														<!-- Submit button -->
+														<input type="submit" value="Submit">
+													</form>
+												</section>
+											</ul>
+										</li>
+									</ul>
+								</nav>
+						</div>
+					</div>
+			</div>
+
+		<!-- Scripts -->
+			<script src="{{ url_for('static', filename='assets/js/jquery.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/browser.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/breakpoints.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/util.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+
+	</body>
+</html>

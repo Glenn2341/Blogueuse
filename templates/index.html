@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Editorial by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}">
+		<style>
+			.half-width {
+				width: 25% !important;
+			}
+		</style>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Editorial</strong> by HTML5 UP</a>
+									<ul class="icons">
+										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+									</ul>
+								</header>
+
+							<!-- Banner -->
+								<section id="banner">
+									<div class="content">
+										<header>
+											<h1>Hi, I’m Editorial<br />
+											by HTML5 UP</h1>
+											<p>A free and fully responsive site template</p>
+										</header>
+										<p>Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin aliquam facilisis ante interdum congue. Integer mollis, nisl amet convallis, porttitor magna ullamcorper, amet egestas mauris. Ut magna finibus nisi nec lacinia. Nam maximus erat id euismod egestas. Pellentesque sapien ac quam. Lorem ipsum dolor sit nullam.</p>
+										<ul class="actions">
+											<li><a href="#" class="button big">Learn More</a></li>
+										</ul>
+									</div>
+									<span class="image object">
+										<!-- <img src="images/pic10.jpg" alt="" /> -->
+										<img src="{{ url_for('static', filename='images/pic10.jpg') }}" alt="">
+									</span>
+								</section>
+
+							<!-- Top topic Section -->
+								<section>
+									<header class="major">
+										<!--<h2>What's your Passion?</h2>-->
+										<!-- <h2>Hot topics</h2>-->
+										<h2>What's your Passion?</h2>
+									</header>
+									<div class="features">
+										{% for topic in topic_selection %}
+										<article class="half-width">
+											<span class="icon fa-gem"></span>
+											<div class="content">
+												<form method="post" action="{{ url_for('search.search') }}" class="link-style">
+													{{ searchform.hidden_tag() }}
+													{{ searchform.query(value=topic, id='query-' ~ loop.index, readonly="readonly", hidden="hidden", style="display:none;") }}
+													{{ searchform.submit(label=topic, class="topic-submit", value=topic) }}
+												</form>
+											</div>
+										</article>
+										{% endfor %}																	
+									</div>
+								</section>
+
+							<!-- Posts Section -->
+								<section>
+									<header class="major">
+										<h2>Recent posts</h2>
+									</header>
+									<div class="posts">									
+									{% for post in posts %}
+									<article>
+										<a href="#" class="image"><img src="{{ url_for('static', filename='images/pic01.jpg') }}" alt="" /></a>
+										<header>
+											<h3>{{ post.title }}</h3>
+											<p>By {{post.author.name}}</p>
+										</header>
+										<p>{{ post.preview }}</p>
+										<ul class="actions">
+											<li><a href="{{ url_for('post.show_post', post_id=post.id) }}" class="button">Read</a></li>
+										</ul>
+									</article>
+									{% endfor %}							
+									</div>
+								</section>
+						</div>
+					</div>
+					{% include 'sidebar.html' %}
+			</div>		
+			<script src="{{ url_for('static', filename='assets/js/jquery.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/browser.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/breakpoints.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/util.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+	</body>
+</html>
