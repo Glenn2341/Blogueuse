@@ -54,7 +54,7 @@
 
 									{% for author in authors %}
 									<article>
-										<a href="#" class="image"><img src="{{ url_for('static', filename='images/pic01.jpg') }}" alt="" /></a>
+										<a href="#" class="image"><img src="{{ url_for('static', filename='images/author/' ~ author.name.replace(' ', '_') ~ '.jpg') }}" alt="" /></a>
 										<header>
 											<h3>{{ author.name }}</h3>
 											<p>{{author.role}}</p>

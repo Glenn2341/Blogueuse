@@ -28,19 +28,22 @@ def get_spotlight_posts():
 def index():
     searchform = SearchForm()
 
-    # Retrieve the list of posts from the database
+    # Retrieve the list of posts from the database, and shuffle
     posts = BusinessLogicLayer.businesslogic.getposts()
+    random.shuffle(posts)
 
     topics = BusinessLogicLayer.businesslogic.gettags()
     topic_names = [topic.name for topic in topics]
     spotlight = random.sample(topics, 1)[0]
     spotlightposts = BusinessLogicLayer.businesslogic.get_posts_by_tag(spotlight.id)
 
+    featured_post = random.choice(posts)
+
     if(len(spotlightposts) > 3):
         spotlightposts = random.sample(spotlightposts, 3)
 
     # Pass the list of posts to the view for rendering
-    return render_template('/index.html', posts=posts, topic_selection = topic_names, spotlight_posts = spotlightposts, spotlight_topic = spotlight.name, searchform=searchform)
+    return render_template('/index.html', posts=posts, topic_selection = topic_names, spotlight_posts = spotlightposts, spotlight_topic = spotlight.name, searchform=searchform, featured_post = featured_post)
 
 
 @home_blueprint.route('/about')
@@ -96,6 +99,6 @@ def generic():
 
     return render_template('/generic.html')
 
-# @home_blueprint.route('/')
-# def index():
-#     return 'Hello, world! Blogueuse'
+@home_blueprint.route('/')
+def entry():
+    return redirect(url_for('home.index'))

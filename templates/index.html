@@ -6,13 +6,23 @@
 -->
 <html>
 	<head>
+		
 		<title>Editorial by HTML5 UP</title>
+		
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}">
 		<style>
 			.half-width {
 				width: 25% !important;
+			}
+			
+			.features > article > .content > h3 {
+    		text-align: center;
+			}
+			.topic-title {
+    		text-align: center;
+    		width: 100%;
 			}
 		</style>
 	</head>
@@ -25,9 +35,10 @@
 					<div id="main">
 						<div class="inner">
 
-							<!-- Header -->
+							<!-- Header  -->
 								<header id="header">
-									<a href="index.html" class="logo"><strong>Editorial</strong> by HTML5 UP</a>
+									<a href="index.html" class="logo"><strong>Blogueuse</strong> find your niche</a>
+									<!--
 									<ul class="icons">
 										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
 										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
@@ -35,28 +46,31 @@
 										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
 										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
 									</ul>
+									-->
 								</header>
+							
 
 							<!-- Banner -->
 								<section id="banner">
 									<div class="content">
 										<header>
-											<h1>Hi, I’m Editorial<br />
-											by HTML5 UP</h1>
-											<p>A free and fully responsive site template</p>
+											<h2><strong>Featured post</strong><br /></h2>
+											<!-- the legend of gemini -->
+											<h3>{{featured_post.title}}</h3>
+											<p>{{featured_post.author.name}}</p>
 										</header>
-										<p>Aenean ornare velit lacus, ac varius enim ullamcorper eu. Proin aliquam facilisis ante interdum congue. Integer mollis, nisl amet convallis, porttitor magna ullamcorper, amet egestas mauris. Ut magna finibus nisi nec lacinia. Nam maximus erat id euismod egestas. Pellentesque sapien ac quam. Lorem ipsum dolor sit nullam.</p>
+										<p>{{featured_post.preview}}</p>
 										<ul class="actions">
 											<li><a href="#" class="button big">Learn More</a></li>
 										</ul>
 									</div>
 									<span class="image object">
 										<!-- <img src="images/pic10.jpg" alt="" /> -->
-										<img src="{{ url_for('static', filename='images/pic10.jpg') }}" alt="">
+										<img src="{{ url_for('static', filename='images/posts_small/' ~ featured_post.id ~ '.jpg') }}" alt="" />
 									</span>
 								</section>
 
-							<!-- Top topic Section -->
+								<!-- Top topic Section -->
 								<section>
 									<header class="major">
 										<!--<h2>What's your Passion?</h2>-->
@@ -65,17 +79,21 @@
 									</header>
 									<div class="features">
 										{% for topic in topic_selection %}
-										<article class="half-width">
-											<span class="icon fa-gem"></span>
-											<div class="content">
-												<form method="post" action="{{ url_for('search.search') }}" class="link-style">
-													{{ searchform.hidden_tag() }}
-													{{ searchform.query(value=topic, id='query-' ~ loop.index, readonly="readonly", hidden="hidden", style="display:none;") }}
-													{{ searchform.submit(label=topic, class="topic-submit", value=topic) }}
-												</form>
-											</div>
-										</article>
-										{% endfor %}																	
+										
+											<article class="half-width">
+												<div class="content" style="display: flex; flex-direction: column; align-items: center;">
+													<h3 style="text-align: center; ">{{ topic }}</h3>
+													<form method="POST" action="{{ url_for('search.search') }}" style="display: inline-block;">
+														{{ searchform.csrf_token }}
+														<input type="hidden" name="query" value="{{ topic }}" />
+													<button type="submit" onclick="this.form.submit();" style="background: none; border: none; padding: 0; cursor: pointer;">
+														<img src="{{ url_for('static', filename='images/icons/' ~ topic ~ '.jpg') }}" alt="Custom Image" style="display: block; margin-left: auto; margin-right: auto;" />
+													</button>
+													</form>
+												</div>
+											</article>
+										
+									{% endfor %}															
 									</div>
 								</section>
 
@@ -87,7 +105,7 @@
 									<div class="posts">									
 									{% for post in posts %}
 									<article>
-										<a href="#" class="image"><img src="{{ url_for('static', filename='images/pic01.jpg') }}" alt="" /></a>
+										<a href="#" class="image"><img src="{{ url_for('static', filename='images/posts_small/' ~ post.id ~ '.jpg') }}" alt="" /></a>
 										<header>
 											<h3>{{ post.title }}</h3>
 											<p>By {{post.author.name}}</p>

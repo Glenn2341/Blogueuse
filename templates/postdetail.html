@@ -52,8 +52,9 @@
 									<header class="main">
 										<h1>{{ post.title }}</h1>
 									</header>
+									
 
-									<span class="image main"><img src="{{ url_for('static', filename='images/pic11.jpg') }}" alt="" /></span>
+									<span class="image main"><img src="{{ url_for('static', filename='images/posts_large/' ~ post.id ~ '.jpg') }}" alt=""/></span>
 
 									{% for block in post.content.split('\n\n') %}
 									<p>{{ block }}</p>

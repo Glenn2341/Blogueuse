@@ -87,13 +87,14 @@ def post_search(querystring):
     tagsearch = set()
 
     for author in allauthors:
-        if(author.name in querystring):
+        if(author.name.lower() in querystring.lower()):
             authorsearch.add(author)
             querystring = querystring.replace(author.name, '')
+            
     querytagtokens = querystring.split(' ')
-
+    querytagtokens = [querytag.lower() for querytag in querytagtokens]
     for tag in alltags:
-        if(tag.name in querytagtokens):
+        if(tag.name.lower() in querytagtokens):
             tagsearch.add(tag)
 
     # if no author or tags found, return empty
