@@ -1,0 +1,47 @@
+.comment-form-wrapper label {
+    margin-bottom:1px !important;
+}		
+.comment-form-wrapper {
+width: 50%; /* Add this line to set the width of the wrapper div */
+}	
+.comment-form-wrapper .field-name {
+margin-top: 10px;
+width: 50% !important;
+}
+.comment-form-wrapper .field-name-box {
+width: 50% !important;
+}
+
+/* Topic quickmenuy styling */
+.features .topic-article {
+    width: 15%;
+}
+.topic-article h3 {
+    text-align: center;
+}
+.topic-article ::content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.topic-article form{
+    display: inline-block;
+}
+.topic-article button{
+    background: none; 
+    border: none; 
+    padding: 0; 
+    cursor: pointer;
+}
+.topic-article img{
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto;
+}
+
+/* Search-results styling */
+.search-center {
+    width: 50% !important;
+}
+
+									
