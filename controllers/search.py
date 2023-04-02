@@ -11,6 +11,7 @@ import random
 search_blueprint = Blueprint('search', __name__)
 
 
+# Route for handling search functionality
 @search_blueprint.route('/search', methods=['GET', 'POST'])
 def search():
     form = SearchForm()
@@ -23,6 +24,7 @@ def search():
     if(search_query is None):
         search_query = ''
 
+    # If the form is valid, perform the search and render the search results
     if form.validate_on_submit():
 
         # Find a list of posts relevant to the search
@@ -31,17 +33,3 @@ def search():
         return render_template('/postsearch.html', posts=filteredposts, originalsearch=search_query, form=form, spotlight_topic = spotlight['topic'].name, spotlight_posts = spotlight['posts'],  searchform = sidebar_searchform)
 
     return render_template('/postsearch.html', posts=[], originalsearch=search_query, form=form, spotlight_topic = spotlight['topic'].name, spotlight_posts = spotlight['posts'],  searchform = sidebar_searchform)
-
-
-
-
-
-# @search_blueprint.route('/search')
-# def search():
-#     # Retrieve the search query from the URL parameters
-#     search_query = request.args.get('query', '')
-
-#     #Find a list of posts releveant to the search
-#     filteredposts = BusinessLogicLayer.businesslogic.post_search(search_query)
-
-#     return render_template('/postsearch.html', posts=filteredposts, originalsearch = search_query)

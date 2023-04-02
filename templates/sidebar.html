@@ -1,67 +1,21 @@
-
+<script src="{{ url_for('static', filename='jscustom/scripts.js') }}"></script>
 
 <!-- Sidebar -->
 <div id="sidebar">
     <div class="inner">
 
-
-            <!--
-        <style>
-            #search {
-                position: relative;
-            }
-            #search-btn {
-                position: absolute;
-                right: 0;
-                top: 0;
-                height: 100%;
-                background-color: #ddd6d6;
-                border: none;
-                color: black;
-                padding: 0 10px;
-                cursor: pointer;
-            }
-        </style>
-        -->
-
-
-<script>
-    function toggleSearchButton() {
-        const searchInput = document.getElementById('sidebar_query');
-        const searchButton = document.getElementById('sidebar_search-btn');
-
-        if (searchInput.value.length > 0) {
-            searchButton.style.display = 'block';
-        } else {
-            searchButton.style.display = 'none';
-        }
-    }
-</script>
-
-{% if request.endpoint != 'search.search' %}
-<section id="search" class="alt">
-    <div class="search-center">
-    <form method="post" action="{{ url_for('search.search') }}">
-        {{ searchform.hidden_tag() }}
-        {{ searchform.query(placeholder="Search", id="sidebar_query", required="required", oninput="toggleSearchButton()") }}
-        {{ searchform.submit(id="sidebar_search-btn", style="display:none;" + "margin-top: 5px;") }}
-    </form>
-    </div>
-</section>
-{% endif %}
-
-
-
-
-
-        <!-- Search 
+    {% if request.endpoint != 'search.search' %}
     <section id="search" class="alt">
-        <form method="get" action="/search">
-            <input type="text" name="query" id="query" placeholder="Search" oninput="toggleSearchButton()" required />
-            <button type="submit" id="search-btn" style="display:none;">Search</button>
+        <div class="search-center">
+        <form method="post" action="{{ url_for('search.search') }}">
+            {{ searchform.hidden_tag() }}
+            {{ searchform.query(placeholder="Search", id="query", required="required", oninput="toggleSearchButton()") }}
+            {{ searchform.submit(id="search-btn", style="display:none;" + "margin-top: 5px;") }}
         </form>
+        </div>
     </section>
-        -->
+    {% endif %}
+
         <!-- Menu -->
             <nav id="menu">
                 <header class="major">
@@ -76,15 +30,12 @@
                 </ul>
             </nav>
 
-        <!-- Section -->
+        <!-- Spotlight Section -->
             <section>
                 <header class="major">
                     <h2>Discover {{spotlight_topic}}</h2>
                 </header>
-                <div class="mini-posts">
-
-                    
-
+                <div class="mini-posts">                  
                     {% for post in spotlight_posts %}
                     <article>
                         <a href="{{ url_for('post.show_post', post_id=post.id) }}" class="image">
@@ -93,12 +44,10 @@
                         <p>{{post.title}}</p>
                     </article>
                     {% endfor %}
-
                 </div>
-
             </section>
 
-        <!-- Section -->
+        <!-- Feedback Section -->
             <section>
                 <header class="major">
                     <h2>Get in touch</h2>
@@ -114,12 +63,10 @@
                     -->
                 </ul>
             </section>
-
         <!-- Footer 
             <footer id="footer">
                 <p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
             </footer>
         -->
-
     </div>
 </div>

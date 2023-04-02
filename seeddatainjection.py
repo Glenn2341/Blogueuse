@@ -15,11 +15,8 @@ def get_posts():
     with open(postfile, 'r') as file:
          posts_data = json.load(file)
 
-    #Deserialize the JSON string to a list of dictionaries
-    #posts_data = json.loads(data)
-
-    # Convert the list of dictionaries back to Post and Comment objects
-# Convert the list of dictionaries back to Post and Comment objects
+    
+# Convert the list of dictionaries to Post and Comment objects
     posts = []
     for post_data in posts_data:
         comments = [Comment(comment_data['postid'], comment_data['id'], comment_data['author'], comment_data['content'], comment_data['created_utc']) for comment_data in post_data['comments']]
@@ -42,12 +39,13 @@ def get_comments():
     comments = [Comment(comment_data['postid'], comment_data['id'], comment_data['author'], comment_data['content'], comment_data['created_utc']) for comment_data in comments_data]
     return comments
 
+# A function to generate a list of tags objects from a seed file
 def get_tags():
     #Read the data 
     with open(tagsfile, 'r') as file:
         tags_data = json.load(file)
 
-    # Convert json to object
+# Convert json to object
 # Convert the list of tags back to tag
     alltagslist = []
     for tag_data in tags_data:
@@ -84,7 +82,6 @@ def insert_post_tag(conn, postid, tagid):
     conn.commit()
 
 
-#Front end post object contains comment list, DB post table does not
 def injectseeddata(dbname):
     posts = get_posts()
     authors = get_authors()
@@ -119,7 +116,7 @@ def injectseeddata(dbname):
     );
     """)
 
-        # Create the comments table
+    # Create the comments table
     c.execute("""
     CREATE TABLE IF NOT EXISTS Comment (
         id INTEGER PRIMARY KEY,
@@ -131,6 +128,7 @@ def injectseeddata(dbname):
     );
     """)
 
+    # Create the tag table
     c.execute("""
     CREATE TABLE IF NOT EXISTS Tag (
         id INTEGER PRIMARY KEY,
@@ -138,6 +136,7 @@ def injectseeddata(dbname):
     );
     """)
 
+    # Create the postag table
     c.execute("""
     CREATE TABLE IF NOT EXISTS PostTag (
         postid INTEGER,

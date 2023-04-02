@@ -6,6 +6,7 @@ from models.Tag import Tag
 
 dbname = 'blog.db'
 
+# Get author(s) using author id or all authors if no id is provided
 def get_authors(author_id=None):
     # Create a cursor
     c = sqlite3.connect(dbname).cursor()
@@ -34,6 +35,8 @@ def get_authors(author_id=None):
         return [Author(row[0], row[1], row[2], row[3]) for row in rows]
 
 
+# Get post(s) using id or all posts if no id is provided
+#Front end post object contains comment list, DB post table does not
 def get_posts(post_id=None):
     # Create a cursor
     c = sqlite3.connect(dbname).cursor()
@@ -62,6 +65,7 @@ def get_posts(post_id=None):
         return [Post(id=row[0], authorid=row[1], title=row[2], preview=row[3], content=row[4], created_utc=row[5], tags=None, comments=None, author=None) for row in rows]
 
 
+# Get comment(s) using id or all comments if no id is provided
 def get_comments(comment_id=None):
     # Create a cursor
     c = sqlite3.connect(dbname).cursor()
@@ -90,6 +94,7 @@ def get_comments(comment_id=None):
         return [Comment(row[0], row[1], row[2], row[3], row[4]) for row in rows]
 
 
+# Get tag(s) using id or all tags if no id is provided
 def get_tags_by_id(tag_id=None):
     # Create a cursor
     c = sqlite3.connect(dbname).cursor()

@@ -1,20 +1,17 @@
 <!DOCTYPE HTML>
 <!--
-	Editorial by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+	based on Editorial by HTML5 UP
 -->
 <html>
-	<head>
-		
-		<title>Editorial by HTML5 UP</title>
+	<head>		
+		<title>Home - Blogueuse</title>
 		
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}">
 		<style>
 			.half-width {
-				width: 25% !important;
+				width: 15% !important;
 			}
 			
 			.features > article > .content > h3 {
@@ -37,8 +34,9 @@
 
 							<!-- Header  -->
 								<header id="header">
-									<a href="index.html" class="logo"><strong>Blogueuse</strong> find your niche</a>
+									<a href="{{ url_for('home.index') }}" class="logo"><strong>Blogueuse</strong> find your niche</a>
 									<!--
+										<a href="index.html" class="logo"><strong>Blogueuse</strong> find your niche</a>
 									<ul class="icons">
 										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
 										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
@@ -49,7 +47,6 @@
 									-->
 								</header>
 							
-
 							<!-- Banner -->
 								<section id="banner">
 									<div class="content">
@@ -61,20 +58,18 @@
 										</header>
 										<p>{{featured_post.preview}}</p>
 										<ul class="actions">
-											<li><a href="#" class="button big">Learn More</a></li>
+											<li><a href="{{ url_for('post.show_post', post_id=featured_post.id) }}" class="button big">Read Now</a></li>
 										</ul>
 									</div>
-									<span class="image object">
-										<!-- <img src="images/pic10.jpg" alt="" /> -->
-										<img src="{{ url_for('static', filename='images/posts_small/' ~ featured_post.id ~ '.jpg') }}" alt="" />
-									</span>
+									
+									<span class="image object">	
+										<a><img src="{{ url_for('static', filename='images/posts_small/' ~ featured_post.id ~ '.jpg') }}" /></a>
+									</span>								
 								</section>
 
 								<!-- Top topic Section -->
 								<section>
 									<header class="major">
-										<!--<h2>What's your Passion?</h2>-->
-										<!-- <h2>Hot topics</h2>-->
 										<h2>What's your Passion?</h2>
 									</header>
 									<div class="features">
@@ -91,8 +86,7 @@
 													</button>
 													</form>
 												</div>
-											</article>
-										
+											</article>										
 									{% endfor %}															
 									</div>
 								</section>
@@ -105,15 +99,12 @@
 									<div class="posts">									
 									{% for post in posts %}
 									<article>
-										<a href="#" class="image"><img src="{{ url_for('static', filename='images/posts_small/' ~ post.id ~ '.jpg') }}" alt="" /></a>
+										<a href="{{ url_for('post.show_post', post_id=post.id) }}" class="image"><img src="{{ url_for('static', filename='images/posts_small/' ~ post.id ~ '.jpg') }}" alt="" /></a>
 										<header>
 											<h3>{{ post.title }}</h3>
 											<p>By {{post.author.name}}</p>
 										</header>
 										<p>{{ post.preview }}</p>
-										<ul class="actions">
-											<li><a href="{{ url_for('post.show_post', post_id=post.id) }}" class="button">Read</a></li>
-										</ul>
 									</article>
 									{% endfor %}							
 									</div>

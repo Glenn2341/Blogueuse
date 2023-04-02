@@ -4,8 +4,8 @@ from wtforms.validators import DataRequired, Optional, Length, Email
 
 class CommentForm(FlaskForm): 
     post_id = HiddenField('Post ID', validators=[DataRequired()]) 
-    comment = TextAreaField('Comment', validators=[DataRequired(), Length(max=5)])
-    name = StringField('Name', validators=[Optional(), Length(max=10)])
+    comment = TextAreaField('Comment', validators=[DataRequired(), Length(max=500)])
+    name = StringField('Name', validators=[Optional(), Length(max=50)])
 
 class EmailForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])

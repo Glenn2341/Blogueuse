@@ -6,6 +6,7 @@ import DataAccessLayer.dataaccess
 import datetime
 import time
 
+# Populates a post object with tags and author
 def populate_post_tags_and_author(post):
     tags = []
     posttags = DataAccessLayer.dataaccess.get_post_tags_by_postid(post.id)
@@ -19,7 +20,7 @@ def populate_post_tags_and_author(post):
     post.addauthor(author)
 
 
-# get posts and insert relevant tags and authors
+# Retrieve posts and populate with relevant tags and authors
 def getposts(id=None):
     posts = DataAccessLayer.dataaccess.get_posts(id)
 
@@ -32,6 +33,7 @@ def getposts(id=None):
     return posts
 
 
+# Retrieve posts by a specific tag
 def get_posts_by_tag(tagid):
     posttags = DataAccessLayer.dataaccess.get_post_tags_by_tagid(tagid)
     posts = []
@@ -44,10 +46,12 @@ def get_posts_by_tag(tagid):
     return posts
 
 
+# Get author(s) using author id or all authors if no id is provided
 def getauthors(id=None):
     return DataAccessLayer.dataaccess.get_authors(id)
 
 
+# Get comments for a specific post, sorted by creation time
 def get_comments_by_post_id(post_id):
     comments = DataAccessLayer.dataaccess.get_comments_by_post_id(post_id)
 
@@ -57,10 +61,12 @@ def get_comments_by_post_id(post_id):
     return sorted_comments
 
 
+# Get tag(s) using tag id or all tags if no id is provided
 def gettags(tagid=None):
     return DataAccessLayer.dataaccess.get_tags_by_id(tagid)
 
 
+# Save a comment with a created_utc timestamp and anonymous author if not provided
 def save_comment(comment):
     if((comment.author is None) or len(comment.author) == 0):
         comment.addname('Anonymous')
@@ -76,7 +82,7 @@ def save_comment(comment):
     DataAccessLayer.dataaccess.insert_comment(comment)
 
 
-#todo- calling populate_post_tags_and_author shouldn't be necessary here
+# Search for posts based on author names and tags in the query string
 def post_search(querystring):
     #Get all authors and tags
     allauthors = [author for author in getauthors()]

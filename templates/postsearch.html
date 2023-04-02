@@ -1,19 +1,22 @@
 <!DOCTYPE HTML>
 <!--
-	Editorial by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+	based on Editorial by HTML5 UP
 -->
 <html>
 	<head>
-		<title>Editorial by HTML5 UP</title>
+		<title>Post Search - Blogueuse</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}">
+		<script src="{{ url_for('static', filename='jscustom/scripts.js') }}"></script>
 		<style>			
 			.search-center {
 			width: 50% !important;
     		}
+			.post {
+            padding: 25px; /* Adjust this value to add more or less padding */
+            /* Other styles you want to apply to each post */
+        }
 		</style>
 	</head>
 	<body class="is-preload">
@@ -27,67 +30,21 @@
 
 							<!-- Header -->
 								<header id="header">
-									<a href="index.html" class="logo"><strong>Editorial</strong> by HTML5 UP</a>
-									<ul class="icons">
-										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
-										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
-									</ul>
+									<a href="{{ url_for('home.index') }}" class="logo"><strong>Blogueuse</strong> find your niche</a>
 								</header>
 							
 
-							<!-- Section -->
-								<section>
-
-
-									<script>
-										function toggleSearchButtonCenter() {
-											const searchInput = document.getElementById('query');
-											const searchButton = document.getElementById('search-btn');
-									
-											if (searchInput.value.length > 0) {
-												searchButton.style.display = 'block';
-											} else {
-												searchButton.style.display = 'none';
-											}
-										}
-									</script>
-
-
+							<!-- Section for search and posts -->
 									<section id="search" class="alt">
 										<div class="search-center">
 										<form method="post" action="{{ url_for('search.search') }}">
 											{{ form.hidden_tag() }}
-											{{ form.query(placeholder="Make a New Search", id="query", required="required", oninput="toggleSearchButtonCenter()") }}
+											{{ form.query(placeholder="Make a New Search", id="query", required="required", oninput="toggleSearchButton()") }}
 											{{ form.submit(id="search-btn", style="display:none;" + "margin-top: 5px;") }}
 										</form>
 										</div>
 									</section>
 
-
-
-								<!-- 
-								<section id="search" class="alt">
-									<form method="post" action="#">
-										<input type="text" name="query" id="query" placeholder="Search Again" />
-									</form>
-								</section>
-							-->
-
-
-				
-							
-													<!-- Search 
-													<section id="search" class="alt">
-														<form method="get" action="/search">
-															<input type="text" name="query" id="query" placeholder="Make a New Search" required />
-															<button type="submit" id="search-btn" style="display:none;">Search</button>
-														</form>
-													</section>
-												-->
-									
 									{% if posts|length > 0 %}
 									<header class="major">
 										<h2>Search Results for "{{originalsearch}}": </h2>
@@ -101,11 +58,21 @@
 										{% endif %}
 									{% endif %}
 
+
+									<style>
+										.vertical-articles-container {
+											display: flex;
+											flex-direction: column;
+										}
+									</style>
+
+
 									<div class="posts">
-										
+
+									<div class="vertical-articles-container">
 									{% for post in posts %}
-									<article>
-										<a href="#" class="image"><img src="{{ url_for('static', filename='images/pic01.jpg') }}" alt="" /></a>
+									<article class="post">
+										<a href="#" class="image"><img src="{{ url_for('static', filename='images/posts_small/' ~ post.id ~ '.jpg') }}" alt="" /></a>
 										<header>
 											<h3>{{ post.title }}</h3>
 											<p>By {{post.author.name}}</p>
@@ -117,11 +84,10 @@
 											
 										</ul>
 									</article>
-									<article></article>
+									
 									{% endfor %}
-									
-									
-
+									</div>
+																	
 									</div>
 								</section>
 
@@ -132,22 +98,12 @@
 				{% include 'sidebar.html' %}
 
 			</div>
-
-		<!-- Scripts 
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-		-->
 		
 			<script src="{{ url_for('static', filename='assets/js/jquery.min.js') }}"></script>
 			<script src="{{ url_for('static', filename='assets/js/browser.min.js') }}"></script>
 			<script src="{{ url_for('static', filename='assets/js/breakpoints.min.js') }}"></script>
 			<script src="{{ url_for('static', filename='assets/js/util.js') }}"></script>
 			<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
-		
-
-
+	
 	</body>
 </html>

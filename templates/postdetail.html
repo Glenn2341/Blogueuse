@@ -1,12 +1,10 @@
 <!DOCTYPE HTML>
 <!--
-	Editorial by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+	based on Generic by HTML5 UP
 -->
 <html>
 	<head>
-		<title>Generic - Editorial by HTML5 UP</title>
+		<title>Post - Blogueuse</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}" />
@@ -37,14 +35,7 @@
 
 							<!-- Header -->
 								<header id="header">
-									<a href="index.html" class="logo"><strong>Editorial</strong> by HTML5 UP</a>
-									<ul class="icons">
-										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
-										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
-									</ul>
+									<a href="{{ url_for('home.index') }}" class="logo"><strong>Blogueuse</strong> find your niche</a>
 								</header>
 
 							<!-- Content -->
@@ -68,14 +59,12 @@
 											<header>
 											<h3>Your Thoughts?</h3>
 											<p>At Blogueuse, we value every opinion -- even yours</p>
-											<!-- be a part of the conversation
-											<p>At Blogueuse, we value every opinion -- even yours</p>
-											-->
+											<!-- be a part of the conversation -->
 											</header>
 											<ul>
 												<!-- Comment form -->
 												<section id="comment-form" class="alt">
-													<div class="form-wrapper">
+													<div class="form-wrapper" id = 'comment-form-wrapper'>
 														<form method="post" action="{{ url_for('post.show_post', post_id=post.id) }}">
 														{{ form.hidden_tag() }}
 
@@ -104,24 +93,13 @@
 										</li>
 									</ul>
 								
-
-
-								<!-- Comments Section -->
-								
+								<!-- Comments Section -->								
 									<header class="major">
 										<h2>Comments</h2>
-									</header>
-
-
-									
-
-									<div class="features">
-
-					
-										
+									</header>									
+									<div class="features">														
 										{% for comment in post.comments %}
 										<article>
-											<span class="icon fa-gem"></span>
 											<div class="content">
 												<h3>{{comment.author}}</h3>
 												<p>{{comment.content}}</p>																				
@@ -129,20 +107,13 @@
 										</article>
 										<article></article>
 										{% endfor %}
-										
-
-										
-
-
+																				
 									</div>
-								</section>
-				
+								</section>				
 							</div>
 					</div>
-
 				<!-- Sidebar -->
 				{% include 'sidebar.html' %}
-
 			</div>
 
 		<!-- Scripts -->
@@ -151,6 +122,5 @@
 			<script src="{{ url_for('static', filename='assets/js/breakpoints.min.js') }}"></script>
 			<script src="{{ url_for('static', filename='assets/js/util.js') }}"></script>
 			<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
-
 	</body>
 </html>
