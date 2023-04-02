@@ -3,107 +3,95 @@
 	based on Editorial by HTML5 UP
 -->
 <html>
-	<head>
-		<title>Post Search - Blogueuse</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}">
-		<script src="{{ url_for('static', filename='jscustom/scripts.js') }}"></script>
-		<style>			
-			.search-center {
-			width: 50% !important;
-    		}
-			.post {
-            padding: 25px; /* Adjust this value to add more or less padding */
-            /* Other styles you want to apply to each post */
-        }
-		</style>
-	</head>
-	<body class="is-preload">
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+<head>
+	<title>Post Search - Blogueuse</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='csscustom/style.css') }}" />
+	<script src="{{ url_for('static', filename='jscustom/scripts.js') }}"></script>
+</head>
 
-				<!-- Main -->
-					<div id="main">
-						<div class="inner">
+<body class="is-preload">
 
-							<!-- Header -->
-								<header id="header">
-									<a href="{{ url_for('home.index') }}" class="logo"><strong>Blogueuse</strong> find your niche</a>
-								</header>
-							
+	<!-- Wrapper -->
+	<div id="wrapper">
 
-							<!-- Section for search and posts -->
-									<section id="search" class="alt">
-										<div class="search-center">
-										<form method="post" action="{{ url_for('search.search') }}">
-											{{ form.hidden_tag() }}
-											{{ form.query(placeholder="Make a New Search", id="query", required="required", oninput="toggleSearchButton()") }}
-											{{ form.submit(id="search-btn", style="display:none;" + "margin-top: 5px;") }}
-										</form>
-										</div>
-									</section>
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
 
-									{% if posts|length > 0 %}
-									<header class="major">
-										<h2>Search Results for "{{originalsearch}}": </h2>
-									</header>
-									{% endif %}
-									{% if posts|length == 0 %}
-										{% if originalsearch|length > 0 %}
-										<header class="major">
-											<h2>No Results for "{{originalsearch}}": </h2>
-										</header>
-										{% endif %}
-									{% endif %}
+				<!-- Header -->
+				<header id="header">
+					<a href="{{ url_for('home.index') }}" class="logo"><strong>Blogueuse</strong> find your niche</a>
+				</header>
 
 
-									<style>
-										.vertical-articles-container {
-											display: flex;
-											flex-direction: column;
-										}
-									</style>
-
-
-									<div class="posts">
-
-									<div class="vertical-articles-container">
-									{% for post in posts %}
-									<article class="post">
-										<a href="#" class="image"><img src="{{ url_for('static', filename='images/posts_small/' ~ post.id ~ '.jpg') }}" alt="" /></a>
-										<header>
-											<h3>{{ post.title }}</h3>
-											<p>By {{post.author.name}}</p>
-										</header>
-										<p>{{ post.preview }}</p>
-										<ul class="actions">
-											
-											<li><a href="{{ url_for('post.show_post', post_id=post.id) }}" class="button">Read</a></li>
-											
-										</ul>
-									</article>
-									
-									{% endfor %}
-									</div>
-																	
-									</div>
-								</section>
-
-						</div>
+				<!-- Section for search and posts -->
+				<section id="search" class="alt">
+					<div class="search-center">
+						<form method="post" action="{{ url_for('search.search') }}">
+							{{ form.hidden_tag() }}
+							{{ form.query(placeholder="Make a New Search", id="query", required="required",
+							oninput="toggleSearchButton()") }}
+							{{ form.submit(id="search-btn", style="display:none;" + "margin-top: 5px;") }}
+						</form>
 					</div>
+				</section>
 
-				<!-- Sidebar -->
-				{% include 'sidebar.html' %}
+				{% if posts|length > 0 %}
+				<header class="major">
+					<h2>Search Results for "{{originalsearch}}": </h2>
+				</header>
+				{% endif %}
+				{% if posts|length == 0 %}
+				{% if originalsearch|length > 0 %}
+				<header class="major">
+					<h2>No Results for "{{originalsearch}}": </h2>
+				</header>
+				{% endif %}
+				{% endif %}
+
+				<div class="posts">
+					<div class="vertical-articles-container">
+						{% for post in posts %}
+						<article class="post">
+							<a href="#" class="image"><img
+									src="{{ url_for('static', filename='images/posts_small/' ~ post.id ~ '.jpg') }}"
+									alt="" /></a>
+							<header>
+								<h3>{{ post.title }}</h3>
+								<p>By {{post.author.name}}</p>
+							</header>
+							<p>{{ post.preview }}</p>
+							<ul class="actions">
+
+								<li><a href="{{ url_for('post.show_post', post_id=post.id) }}" class="button">Read</a>
+								</li>
+
+							</ul>
+						</article>
+
+						{% endfor %}
+					</div>
+				</div>
+				</section>
 
 			</div>
-		
-			<script src="{{ url_for('static', filename='assets/js/jquery.min.js') }}"></script>
-			<script src="{{ url_for('static', filename='assets/js/browser.min.js') }}"></script>
-			<script src="{{ url_for('static', filename='assets/js/breakpoints.min.js') }}"></script>
-			<script src="{{ url_for('static', filename='assets/js/util.js') }}"></script>
-			<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
-	
-	</body>
+		</div>
+
+		<!-- Sidebar -->
+		{% include 'sidebar.html' %}
+
+	</div>
+
+	<script src="{{ url_for('static', filename='assets/js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='assets/js/browser.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='assets/js/breakpoints.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='assets/js/util.js') }}"></script>
+	<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+
+</body>
+
 </html>

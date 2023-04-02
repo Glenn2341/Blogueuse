@@ -3,120 +3,100 @@
 	based on Editorial by HTML5 UP
 -->
 <html>
-	<head>		
-		<title>Home - Blogueuse</title>
-		
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}">
-		<style>
-			.half-width {
-				width: 15% !important;
-			}
-			
-			.features > article > .content > h3 {
-    		text-align: center;
-			}
-			.topic-title {
-    		text-align: center;
-    		width: 100%;
-			}
-		</style>
-	</head>
-	<body class="is-preload">
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+<head>
+	<title>Home - Blogueuse</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='csscustom/style.css') }}" />
+</head>
 
-				<!-- Main -->
-					<div id="main">
-						<div class="inner">
+<body class="is-preload">
 
-							<!-- Header  -->
-								<header id="header">
-									<a href="{{ url_for('home.index') }}" class="logo"><strong>Blogueuse</strong> find your niche</a>
-									<!--
-										<a href="index.html" class="logo"><strong>Blogueuse</strong> find your niche</a>
-									<ul class="icons">
-										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
-										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
-									</ul>
-									-->
-								</header>
-							
-							<!-- Banner -->
-								<section id="banner">
-									<div class="content">
-										<header>
-											<h2><strong>Featured post</strong><br /></h2>
-											<!-- the legend of gemini -->
-											<h3>{{featured_post.title}}</h3>
-											<p>{{featured_post.author.name}}</p>
-										</header>
-										<p>{{featured_post.preview}}</p>
-										<ul class="actions">
-											<li><a href="{{ url_for('post.show_post', post_id=featured_post.id) }}" class="button big">Read Now</a></li>
-										</ul>
-									</div>
-									
-									<span class="image object">	
-										<a><img src="{{ url_for('static', filename='images/posts_small/' ~ featured_post.id ~ '.jpg') }}" /></a>
-									</span>								
-								</section>
+	<!-- Wrapper -->
+	<div id="wrapper">
 
-								<!-- Top topic Section -->
-								<section>
-									<header class="major">
-										<h2>What's your Passion?</h2>
-									</header>
-									<div class="features">
-										{% for topic in topic_selection %}
-										
-											<article class="half-width">
-												<div class="content" style="display: flex; flex-direction: column; align-items: center;">
-													<h3 style="text-align: center; ">{{ topic }}</h3>
-													<form method="POST" action="{{ url_for('search.search') }}" style="display: inline-block;">
-														{{ searchform.csrf_token }}
-														<input type="hidden" name="query" value="{{ topic }}" />
-													<button type="submit" onclick="this.form.submit();" style="background: none; border: none; padding: 0; cursor: pointer;">
-														<img src="{{ url_for('static', filename='images/icons/' ~ topic ~ '.jpg') }}" alt="Custom Image" style="display: block; margin-left: auto; margin-right: auto;" />
-													</button>
-													</form>
-												</div>
-											</article>										
-									{% endfor %}															
-									</div>
-								</section>
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
 
-							<!-- Posts Section -->
-								<section>
-									<header class="major">
-										<h2>Recent posts</h2>
-									</header>
-									<div class="posts">									
-									{% for post in posts %}
-									<article>
-										<a href="{{ url_for('post.show_post', post_id=post.id) }}" class="image"><img src="{{ url_for('static', filename='images/posts_small/' ~ post.id ~ '.jpg') }}" alt="" /></a>
-										<header>
-											<h3>{{ post.title }}</h3>
-											<p>By {{post.author.name}}</p>
-										</header>
-										<p>{{ post.preview }}</p>
-									</article>
-									{% endfor %}							
-									</div>
-								</section>
-						</div>
+				<!-- Header  -->
+				<header id="header">
+					<a href="{{ url_for('home.index') }}" class="logo"><strong>Blogueuse</strong> find your niche</a>
+				</header>
+
+				<!-- Banner -->
+				<section id="banner">
+					<div class="content">
+						<header>
+							<h2><strong>Featured post</strong><br /></h2>
+							<h3>{{featured_post.title}}</h3>
+							<p>{{featured_post.author.name}}</p>
+						</header>
+						<p>{{featured_post.preview}}</p>
+						<ul class="actions">
+							<li><a href="{{ url_for('post.show_post', post_id=featured_post.id) }}"
+									class="button big">Read Now</a></li>
+						</ul>
 					</div>
-					{% include 'sidebar.html' %}
-			</div>		
-			<script src="{{ url_for('static', filename='assets/js/jquery.min.js') }}"></script>
-			<script src="{{ url_for('static', filename='assets/js/browser.min.js') }}"></script>
-			<script src="{{ url_for('static', filename='assets/js/breakpoints.min.js') }}"></script>
-			<script src="{{ url_for('static', filename='assets/js/util.js') }}"></script>
-			<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
-	</body>
+					<span class="image object">
+						<a><img src="{{ url_for('static', filename='images/posts_small/' ~ featured_post.id ~ '.jpg') }}" /></a>
+					</span>
+				</section>
+			
+				<!-- Top topic Section -->
+				<section>
+					<header class="major">
+						<h2>What's your Passion?</h2>
+					</header>
+					<div class="features">
+						{% for topic in topic_selection %}
+						<article class="topic-article">
+							<div class="content">
+								<h3>{{ topic }}</h3>
+								<form method="POST" action="{{ url_for('search.search') }}">
+									{{ searchform.csrf_token }}
+									<input type="hidden" name="query" value="{{ topic }}" />
+									<button type="submit" onclick="this.form.submit();">
+										<img src="{{ url_for('static', filename='images/icons/' ~ topic ~ '.jpg') }}" alt="Custom Image"/>
+									</button>
+								</form>
+							</div>
+						</article>
+						{% endfor %}
+					</div>
+				</section>
+
+				<!-- Posts Section -->
+				<section>
+					<header class="major">
+						<h2>Recent posts</h2>
+					</header>
+					<div class="posts">
+						{% for post in posts %}
+						<article>
+							<a href="{{ url_for('post.show_post', post_id=post.id) }}" class="image"><img
+									src="{{ url_for('static', filename='images/posts_small/' ~ post.id ~ '.jpg') }}"
+									alt="" /></a>
+							<header>
+								<h3>{{ post.title }}</h3>
+								<p>By {{post.author.name}}</p>
+							</header>
+							<p>{{ post.preview }}</p>
+						</article>
+						{% endfor %}
+					</div>
+				</section>
+			</div>
+		</div>
+		{% include 'sidebar.html' %}
+	</div>
+	<script src="{{ url_for('static', filename='assets/js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='assets/js/browser.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='assets/js/breakpoints.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='assets/js/util.js') }}"></script>
+	<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+</body>
+
 </html>

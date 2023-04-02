@@ -3,124 +3,103 @@
 	based on Generic by HTML5 UP
 -->
 <html>
-	<head>
-		<title>Post - Blogueuse</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}" />
-		<style>			
-			.form-wrapper label {
-				margin-bottom:1px !important;
-			}		
-			.form-wrapper {
-			width: 50%; /* Add this line to set the width of the wrapper div */
-			}	
-			.form-wrapper .field-name {
-        	margin-top: 10px;
-			width: 50% !important;
-    		}
-			.form-wrapper .field-name-box {
-			width: 50% !important;
-    		}
-		</style>
-	</head>
-	<body class="is-preload">
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+<head>
+	<title>Post - Blogueuse</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='csscustom/style.css') }}" />
+</head>
 
-				<!-- Main -->
-					<div id="main">
-						<div class="inner">
+<body class="is-preload">
 
-							<!-- Header -->
-								<header id="header">
-									<a href="{{ url_for('home.index') }}" class="logo"><strong>Blogueuse</strong> find your niche</a>
-								</header>
+	<!-- Wrapper -->
+	<div id="wrapper">
 
-							<!-- Content -->
-								<section>
-									<header class="main">
-										<h1>{{ post.title }}</h1>
-									</header>
-									
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
 
-									<span class="image main"><img src="{{ url_for('static', filename='images/posts_large/' ~ post.id ~ '.jpg') }}" alt=""/></span>
+				<!-- Header -->
+				<header id="header">
+					<a href="{{ url_for('home.index') }}" class="logo"><strong>Blogueuse</strong> find your niche</a>
+				</header>
 
-									{% for block in post.content.split('\n\n') %}
-									<p>{{ block }}</p>
-									{% endfor %}
-								</section>
-								<section>
+				<!-- Content -->
+				<section>
+					<header class="main">
+						<h1>{{ post.title }}</h1>
+					</header>
+					<span class="image main"><img
+							src="{{ url_for('static', filename='images/posts_large/' ~ post.id ~ '.jpg') }}"
+							alt="" /></span>
+					{% for block in post.content.split('\n\n') %}
+					<p>{{ block }}</p>
+					{% endfor %}
+				</section>
 
-									<!-- COMMENT FORM-->								
-									<ul>
-										<li>
-											<header>
-											<h3>Your Thoughts?</h3>
-											<p>At Blogueuse, we value every opinion -- even yours</p>
-											<!-- be a part of the conversation -->
-											</header>
-											<ul>
-												<!-- Comment form -->
-												<section id="comment-form" class="alt">
-													<div class="form-wrapper" id = 'comment-form-wrapper'>
-														<form method="post" action="{{ url_for('post.show_post', post_id=post.id) }}">
-														{{ form.hidden_tag() }}
+				<!--Comments Section-->
+				<section>
+					<!-- COMMENT FORM-->
+					<header>
+						<h3>Your Thoughts?</h3>
+						<p>At Blogueuse, we value every opinion -- even yours</p>
+						<!-- be a part of the conversation -->
+					</header>
+					<section id="comment-form" class="alt">
+						<form method="post" action="{{ url_for('post.show_post', post_id=post.id) }}">
+							{{ form.hidden_tag() }}
 
-														{{ form.comment.label }} {{ form.comment() }}
-														{% if form.comment.errors %}
-														<ul>
-														{% for error in form.comment.errors %}
-															<li>{{ error }}</li>
-														{% endfor %}
-														</ul>
-														{% endif %}
+							{{ form.comment.label }} {{ form.comment() }}
+							{% if form.comment.errors %}
+							<ul>
+								{% for error in form.comment.errors %}
+								<li>{{ error }}</li>
+								{% endfor %}
+							</ul>
+							{% endif %}
 
-														{{ form.name.label(class_="field-name") }} {{ form.name(class_="field-name-box") }}
-														{% if form.name.errors %}
-															<ul>
-															{% for error in form.name.errors %}
-																<li>{{ error }}</li>
-															{% endfor %}
-															</ul>
-														{% endif %}
-														<input type="submit" value="Submit" style="margin-top: 10px;">
-													</form>
-													</div>
-												</section>
-											</ul>
-										</li>
-									</ul>
-								
-								<!-- Comments Section -->								
-									<header class="major">
-										<h2>Comments</h2>
-									</header>									
-									<div class="features">														
-										{% for comment in post.comments %}
-										<article>
-											<div class="content">
-												<h3>{{comment.author}}</h3>
-												<p>{{comment.content}}</p>																				
-											</div>
-										</article>
-										<article></article>
-										{% endfor %}
-																				
-									</div>
-								</section>				
+							{{ form.name.label(class_="field-name", style="padding-top: 10px;") }} {{ form.name(class_="field-name-box") }}
+							{% if form.name.errors %}
+							<ul>
+								{% for error in form.name.errors %}
+								<li>{{ error }}</li>
+								{% endfor %}
+							</ul>
+							{% endif %}
+							<input type="submit" value="Submit" style="margin-top: 10px;">
+						</form>
+					</section>
+
+					<!-- Comments Section -->
+					<header class="major">
+						<h2>Comments</h2>
+					</header>
+					<div class="features">
+						{% for comment in post.comments %}
+						<article>
+							<div class="content">
+								<h3>{{comment.author}}</h3>
+								<p>{{comment.content}}</p>
 							</div>
+						</article>
+						<article></article>
+						{% endfor %}
 					</div>
-				<!-- Sidebar -->
-				{% include 'sidebar.html' %}
+				</section>
 			</div>
+		</div>
+		<!-- Sidebar -->
+		{% include 'sidebar.html' %}
+	</div>
 
-		<!-- Scripts -->
-			<script src="{{ url_for('static', filename='assets/js/jquery.min.js') }}"></script>
-			<script src="{{ url_for('static', filename='assets/js/browser.min.js') }}"></script>
-			<script src="{{ url_for('static', filename='assets/js/breakpoints.min.js') }}"></script>
-			<script src="{{ url_for('static', filename='assets/js/util.js') }}"></script>
-			<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
-	</body>
+	<!-- Scripts -->
+	<script src="{{ url_for('static', filename='assets/js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='assets/js/browser.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='assets/js/breakpoints.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='assets/js/util.js') }}"></script>
+	<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+</body>
+
 </html>

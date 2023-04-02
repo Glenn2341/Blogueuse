@@ -42,7 +42,7 @@ def show_post(post_id):
             BusinessLogicLayer.businesslogic.save_comment(newComment)
 
             # Redirect the user back to the post page
-            return redirect(url_for('post.show_post', post_id=post_id) + '#comment-form-wrapper')
+            return redirect(url_for('post.show_post', post_id=post_id) + '#comment-form')
 
     # Render the full post template with the retrieved post data
     return render_template('/postdetail.html', post=selectedpost, form=form, spotlight_topic = spotlight['topic'].name, spotlight_posts = spotlight['posts'],  searchform = searchform)
