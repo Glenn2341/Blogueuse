@@ -202,3 +202,37 @@ def insert_comment(comment):
     # Close the connection
     conn.close()
 
+
+def remove_comment_by_id(comment_id):
+    # Create a connection and cursor
+    conn = sqlite3.connect(dbname)
+    c = conn.cursor()
+
+    # Execute the query to delete the comment with the given id
+    c.execute("""
+        DELETE FROM Comment
+        WHERE id = ?
+    """, (comment_id,))
+
+    # Commit the changes to the database
+    c.commit()
+
+
+
+def get_comments_since_date(date):
+    # Create a connection and cursor
+    conn = sqlite3.connect(dbname)
+    c = conn.cursor()
+
+    timestamp = int(date.timestamp())
+
+    # Query to get all comments made after the given date
+    c.execute("SELECT * FROM Comment WHERE created_utc > ?", (timestamp,))
+
+    # Fetch all rows from the result
+    result = c.fetchall()
+
+     # Convert the results into Comment objects
+    comments = [Comment(postid=row[1], id=row[0], author=row[2], content=row[3], created_utc=row[4]) for row in result]
+
+    return comments

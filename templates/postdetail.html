@@ -68,6 +68,15 @@
 								{% endfor %}
 							</ul>
 							{% endif %}
+
+							{{ form.recaptcha }}
+							{% if form.recaptcha.errors %}
+							<ul>
+								{% for error in form.recaptcha.errors %}
+								<li>{{ error }}</li>
+								{% endfor %}
+							</ul>
+							{% endif %}
 							<input type="submit" value="Submit" style="margin-top: 10px;">
 						</form>
 					</section>

@@ -3,6 +3,7 @@ from wtforms import StringField, TextAreaField, HiddenField, SubmitField
 from wtforms.validators import DataRequired, Optional, Length, Email
 from wtforms.validators import ValidationError
 from better_profanity import profanity
+from flask_wtf.recaptcha import RecaptchaField
 
 def contains_profanity(text):
     return profanity.contains_profanity(text)
@@ -16,6 +17,7 @@ class CommentForm(FlaskForm):
     post_id = HiddenField('Post ID', validators=[DataRequired()]) 
     comment = TextAreaField('Comment', validators=[DataRequired(), Length(max=500), NoProfanity()])
     name = StringField('Name', validators=[Optional(), Length(max=50)])
+    recaptcha = RecaptchaField()
 
 class EmailForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
