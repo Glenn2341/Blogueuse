@@ -19,5 +19,5 @@ export FLASK_ENV=production
 flask run  
 
 ## Resources. 
-Stock photos via unsplash.  
+Stock photos via unsplash. Article descriptions specify the image source.  
 HTML templates based on templates from HTML5up  
