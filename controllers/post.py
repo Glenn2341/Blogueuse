@@ -32,6 +32,8 @@ def show_post(post_id):
     comments = BusinessLogicLayer.businesslogic.get_comments_by_post_id(post_id)
     selectedpost.addcomments(comments)
 
+    author = BusinessLogicLayer.businesslogic.getauthors(selectedpost.authorid)
+
     # If the request is a POST, handle the comment form submission
     if request.method == 'POST':
         if form.validate_on_submit():
@@ -45,4 +47,4 @@ def show_post(post_id):
             return redirect(url_for('post.show_post', post_id=post_id) + '#comment-form')
 
     # Render the full post template with the retrieved post data
-    return render_template('/postdetail.html', post=selectedpost, form=form, spotlight_topic = spotlight['topic'].name, spotlight_posts = spotlight['posts'],  searchform = searchform)
+    return render_template('/postdetail.html', post=selectedpost, form=form, spotlight_topic = spotlight['topic'].name, spotlight_posts = spotlight['posts'],  searchform = searchform, author=author)

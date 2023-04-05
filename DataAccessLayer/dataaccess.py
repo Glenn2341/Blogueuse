@@ -236,3 +236,24 @@ def get_comments_since_date(date):
     comments = [Comment(postid=row[1], id=row[0], author=row[2], content=row[3], created_utc=row[4]) for row in result]
 
     return comments
+
+
+def insert_post(post):
+    # Connect to the database
+    conn = sqlite3.connect(dbname)
+    c = conn.cursor()
+
+    # Insert post into the database
+    c.execute("""
+        INSERT INTO Post (authorid, title, preview, content, created_utc)
+        VALUES (?, ?, ?, ?, ?);
+    """, (post.authorid, post.title, post.preview, post.content, post.created_utc))
+
+    # Get the ID of the post that was just created
+    post_id = c.lastrowid
+
+    # Commit the changes and close the connection
+    conn.commit()
+
+    # Return the post ID
+    return post_id

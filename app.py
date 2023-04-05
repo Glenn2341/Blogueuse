@@ -31,8 +31,7 @@ postfile = 'seeddata/posts.json'
 authorfile = 'seeddata/authors.json'
 db_name = 'blog.db'
 
-
-def main():
+def seed_database():
     # Check if the database file exists
     if os.path.exists(db_name):
         # Delete the database file
@@ -46,8 +45,10 @@ def main():
     # Read seed data from json and inject to db
     seeddatainjection.injectseeddata(db_name)
 
-    return 0
-
+def main(reseed = True):
+    if(reseed):
+        seed_database()
+    
 if __name__ == '__main__':
     main()
     app.run()

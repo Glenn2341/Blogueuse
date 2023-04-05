@@ -37,6 +37,7 @@
 					{% for block in post.content.split('\n\n') %}
 					<p>{{ block }}</p>
 					{% endfor %}
+					<p>By {{author.name}}, {{author.role}}<br>Image via {{ 'Unsplash' if post.id <= 16 else 'Stable Diffusion' }}</p>
 				</section>
 
 				<!--Comments Section-->
