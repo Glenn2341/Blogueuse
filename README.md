@@ -8,7 +8,7 @@ Server cronscript runs these scripts at 10AM EST daily.
 ## Installation
 git clone https://github.com/yourusername/yourproject.git  
 cd yourproject  
-**Activate virtual environment:** 
+**Activate virtual environment:**   
 python3 -m venv venv  
 source venv/bin/activate  
 **Install dependencies:**  
