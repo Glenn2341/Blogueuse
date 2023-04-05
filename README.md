@@ -5,4 +5,4 @@
 
 
 Stock photos via unsplash.
-HTML templates via HTML5up
+HTML templates based on templates from HTML5up
