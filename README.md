@@ -6,7 +6,14 @@ See gupta for generation and moderation scripts.
 Server cronscript runs these scripts at 10AM EST daily.  
 
 ## Installation
-
+git clone https://github.com/yourusername/yourproject.git  
+cd yourproject  
+python3 -m venv venv  
+source venv/bin/activate  
+pip install -r requirements.txt  
+export FLASK_APP=app.py  
+export FLASK_ENV=production  
+flask run  
 
 ### Resources. 
 Stock photos via unsplash.  
