@@ -8,12 +8,12 @@ Server cronscript runs these scripts at 10AM EST daily.
 ## Installation
 git clone https://github.com/yourusername/yourproject.git  
 cd yourproject  
-<u>Activate virtual environment:</u>  
+**Activate virtual environment:** 
 python3 -m venv venv  
 source venv/bin/activate  
-Install dependencies:  
+**Install dependencies:**  
 pip install -r requirements.txt  
-Run:  
+**Run:**  
 export FLASK_APP=app.py  
 export FLASK_ENV=production  
 flask run  
