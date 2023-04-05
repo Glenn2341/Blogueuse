@@ -18,6 +18,6 @@ export FLASK_APP=app.py
 export FLASK_ENV=production  
 flask run  
 
-### Resources. 
+## Resources. 
 Stock photos via unsplash.  
 HTML templates based on templates from HTML5up  
