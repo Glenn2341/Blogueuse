@@ -215,16 +215,14 @@ def remove_comment_by_id(comment_id):
     """, (comment_id,))
 
     # Commit the changes to the database
-    c.commit()
+    conn.commit()  # Call commit() on the connection object
 
 
 
-def get_comments_since_date(date):
+def get_comments_since_date(timestamp):
     # Create a connection and cursor
     conn = sqlite3.connect(dbname)
     c = conn.cursor()
-
-    timestamp = int(date.timestamp())
 
     # Query to get all comments made after the given date
     c.execute("SELECT * FROM Comment WHERE created_utc > ?", (timestamp,))

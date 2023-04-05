@@ -1,0 +1,13 @@
+# .gitignore
+
+# Exclude virtual environments
+venv/
+
+# Exclude .vscode folder
+.vscode/
+
+# Exclude __pycache__ folders and .pyc files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd

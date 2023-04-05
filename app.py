@@ -45,7 +45,7 @@ def seed_database():
     # Read seed data from json and inject to db
     seeddatainjection.injectseeddata(db_name)
 
-def main(reseed = True):
+def main(reseed = False):
     if(reseed):
         seed_database()
     
