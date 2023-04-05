@@ -1,4 +1,6 @@
 # Blogueuse
+A blog site that allowers visitors to make comments and search for posts by topic and author.
+Now featuring GUPTA (Generational Unsupervised Pre-Trained Administrator). Gupta is currently generating content and moderating feedback.
 
 # live site: 
 https://lablogueuse.net/index.  
