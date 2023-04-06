@@ -34,9 +34,13 @@ anchor_painted = Prompt_Anchor(
     positive= 'intense, detailed, painting, stylized, outdoors, cold',
     negative= 'blurry, deformed, distorted'
 )
+anchor_acrylic = Prompt_Anchor(
+    positive= 'Acrylic painting, high contrast, bold brushstrokes, high-resolution',
+    negative= 'blurry, deformed, distorted, (fuzzy lines)'
+)
 
 
-anchors = anchor_landscape, anchor_nostalgia, anchor_cozy, anchor_painted #anchor_sketch,
+anchors = anchor_landscape, anchor_nostalgia, anchor_cozy, anchor_painted, anchor_acrylic #anchor_sketch,
 
 def crop_image_width(input_file, output_file, new_width):
     img = Image.open(input_file)
@@ -118,7 +122,9 @@ def generate_images(post, api_key, savepath_small, savepath_large):
     gen_height = 512
 
     #ensure the same anchor is picked for all images for the same post
-    selected_anchor = anchors[post.id % len(anchors)]
+    #selected_anchor = anchors[post.id % len(anchors)]
+
+    selected_anchor = random.choice(anchors)
 
     response_data = get_image_diffusion(api_key=api_key, prompt_anchor=selected_anchor, prompt=post.title,
                                  width=gen_width, height=gen_height)
