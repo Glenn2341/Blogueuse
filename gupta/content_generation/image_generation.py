@@ -7,8 +7,6 @@ from PIL import Image
 
 from models import Post
 
-url = 'https://api.stability.ai/v1/generation/stable-diffusion-v1-5/text-to-image'
-
 class Prompt_Anchor:
     def __init__(self, positive, negative):
         self.positive = positive

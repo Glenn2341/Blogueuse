@@ -21,11 +21,11 @@ app.register_blueprint(home_blueprint)
 app.register_blueprint(search_blueprint)
 app.register_blueprint(post_blueprint)
 
-app.secret_key = 'your_secret_key_here'
+app.secret_key = os.getenv("BLOGUEUSE_SECRET_KEY")
 
 # Define a variable for the path to the images folder
-app.config['RECAPTCHA_PUBLIC_KEY'] = '6LfIzVIlAAAAALLFApgPYgMTDwSP0nacvoRIwOEO'
-app.config['RECAPTCHA_PRIVATE_KEY'] = '6LfIzVIlAAAAAAPWXAeAS1c_WtS5G6wRcdjyoZtQ'
+app.config['RECAPTCHA_PUBLIC_KEY'] = os.getenv("RECAPTCHA_PUBLIC_KEY")
+app.config['RECAPTCHA_PRIVATE_KEY'] = os.getenv("RECAPTCHA_PRIVATE_KEY")
 app.config['IMAGE_FOLDER'] = 'images'
 postfile = 'seeddata/posts.json'
 authorfile = 'seeddata/authors.json'
