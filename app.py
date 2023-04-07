@@ -17,11 +17,13 @@ from controllers.post import post_blueprint
 
 app = Flask(__name__)
 app.debug = True
+app.secret_key = os.getenv("BLOGUEUSE_SECRET_KEY")
+print("Secret Key: ", app.secret_key)
 app.register_blueprint(home_blueprint)
 app.register_blueprint(search_blueprint)
 app.register_blueprint(post_blueprint)
 
-app.secret_key = os.getenv("BLOGUEUSE_SECRET_KEY")
+
 
 # Define a variable for the path to the images folder
 app.config['RECAPTCHA_PUBLIC_KEY'] = os.getenv("RECAPTCHA_PUBLIC_KEY")
