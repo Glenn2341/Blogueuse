@@ -17,7 +17,8 @@ from controllers.post import post_blueprint
 
 app = Flask(__name__)
 app.debug = True
-app.secret_key = os.getenv("BLOGUEUSE_SECRET_KEY")
+#app.secret_key = os.getenv("BLOGUEUSE_SECRET_KEY")
+app.secret_key = 'secret'
 print("Secret Key: ", app.secret_key)
 app.register_blueprint(home_blueprint)
 app.register_blueprint(search_blueprint)
