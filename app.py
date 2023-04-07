@@ -17,16 +17,7 @@ from controllers.post import post_blueprint
 
 app = Flask(__name__)
 app.debug = True
-app.secret_key = 'super secret'
-print('============================')
-print('============================')
-print('============================')
-print("Secret Key: ", app.secret_key)
-blog_secret = os.getenv("BLOG_SECRET")
-print("blog secret: ", blog_secret)
-print('============================')
-print('============================')
-print('============================')
+app.secret_key = os.getenv("BLOG_SECRET")
 app.register_blueprint(home_blueprint)
 app.register_blueprint(search_blueprint)
 app.register_blueprint(post_blueprint)
